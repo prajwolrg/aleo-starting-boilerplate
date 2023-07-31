@@ -20,7 +20,7 @@
     "clean": "rm -rf build/",
     "build": "yarn clean && tsc",
     "start": "yarn build && NODE_PATH=. node --enable-source-maps build/src/index.js",
-    "test": "NODE_PATH=. && NODE_ENV=development && jest"
+    "test": "NODE_PATH=. && NODE_ENV=development && ZK_MODE=leo && jest"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",

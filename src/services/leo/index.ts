@@ -1,6 +1,6 @@
 // NEW-PROGRAM: Create a new file with the program name and import it here
 import { account } from "./account";
-import { test } from "./test";
+import { test } from "./testProgram";
 
 export { deployPrograms } from "./util";
 
