@@ -46,6 +46,7 @@ const u64 = (value: number | string): LeoU64 => {
   return leoU64Schema.parse(parsed);
 };
 
+// NEW-STRUCT: Update parser to support every new struct created in program
 export const leoParse = {
   field,
   id,
