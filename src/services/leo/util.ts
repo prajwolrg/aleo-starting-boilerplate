@@ -5,7 +5,8 @@ import { promisify } from "util";
 
 import { Address, DevelopmentClient, PrivateKey, ViewKey } from "../../aleo-sdk";
 import { env, FEE, LOCAL_NETWORK_PRIVATE_KEY, programNames } from "../../constants";
-import { LeoTx, leoTxSchema, LeoRecord, LeoViewKey } from "../../types";
+import { LeoTx, leoTxSchema, LeoRecord, LeoViewKey, leoAddressSchema } from "../../types";
+import { Greeting, GreetingRecord, greetingRecordSchema, greetingSchema } from "../../types/helloLeo";
 import { apiError, attemptFetch, decodeId, logger, wait } from "../../utils";
 
 const developmentClient = new DevelopmentClient(env.DEVELOPMENT_SERVER_URL);
@@ -54,7 +55,17 @@ const parseRecordString = (recordString: string): Record<string, unknown> => {
   return JSON.parse(correctJson);
 };
 
-// NEW-STRUCT: Update parser to support every new struct created in program
+const greeting = (record: Record<string, unknown>): Greeting => {
+  const parsed = greetingRecordSchema.parse(record);
+  const res: Greeting = {
+    owner: parsed.owner,
+    fullName: u32(parsed.full_name),
+  };
+  return greetingSchema.parse(res);
+};
+
+// NEW-STRUCT: Update parser to support Leo->JS conversion every new struct/record created in program
+export const parseOutput = { address, field, u8, u32, u64, greeting };
 
 const parseCmdOutput = (cmdOutput: string): Record<string, unknown> => {
   const lines = cmdOutput.split("\n");
@@ -90,8 +101,6 @@ const parseCmdOutput = (cmdOutput: string): Record<string, unknown> => {
 const getTxResult = (tx: LeoTx): string | undefined => {
   return tx.execution.transitions.at(0)?.outputs.at(0)?.value;
 };
-
-export const parseOutput = { address, field, u8, u32, u64 };
 
 const decryptRecord = async (encryptedRecord: LeoRecord, viewKey: LeoViewKey): Promise<Record<string, unknown>> => {
   const decrypted = ViewKey.from_string(viewKey).decrypt(encryptedRecord);

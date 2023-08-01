@@ -2,28 +2,27 @@ import { join } from "path";
 
 import { FEE, programNames } from "../../constants";
 import { LeoPrivateKey, LeoU32, leoU32Schema, LeoViewKey } from "../../types";
+import { Person } from "../../types/helloLeo";
 import { leoParse } from "../../utils";
 import { contractsPath, parseOutput, zkRun } from "./util";
 
-const testProgramPath = join(contractsPath, "test");
+const testProgramPath = join(contractsPath, "hello_leo");
 
-const hello = async (
+const greet = async (
   privateKey: LeoPrivateKey,
   viewKey: LeoViewKey,
-  // TODO: Take input as JS object
-  a: number,
-  b: number
+  p: Person
   // TODO: verify return type
 ): Promise<any> => {
-  const transition = "main";
+  const transition = "greet";
 
   // Convert to Leo Object
-  const leoNumA = leoParse.u32(a);
-  const leoNumB = leoParse.u32(b);
+  const leoPerson = leoParse.person(p);
+  const leoPersonParam = leoParse.stringifyLeoCmdParam(leoPerson);
 
-  const params = [leoNumA, leoNumB];
+  const params = [leoPersonParam];
 
-  const sum = await zkRun({
+  const record = await zkRun({
     privateKey,
     viewKey,
     appName: programNames.HELLO_LEO,
@@ -34,7 +33,7 @@ const hello = async (
   });
 
   // TODO: Convert back to JS Object
-  return sum;
+  return parseOutput.greeting(record);
 };
 
-export const helloLeo = { hello };
+export const helloLeo = { greet };

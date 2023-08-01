@@ -1,16 +1,21 @@
 // The 'hello_leo' program.
 program hello_leo.aleo {
 
-    record Hello{
-        owner: address,
-        sum: u32
+    struct Person{
+        first_name: u32,
+        second_name: u32
     }
 
-    transition hello(public a: u32, b: u32) -> Hello {
-        let sum: u32 = a + b;
-        return Hello {
+    record Greeting{
+        owner: address,
+        full_name: u32
+    }
+
+    transition greet(p: Person) -> Greeting {
+        let full_name: u32 = p.first_name + p.second_name;
+        return Greeting {
             owner: self.caller,
-            sum
+            full_name
         };
     }
 }

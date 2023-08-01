@@ -1,5 +1,6 @@
 import { env } from "../constants";
 import { LeoField, leoFieldSchema, LeoU32, leoU32Schema, LeoU64, leoU64Schema, LeoU8, leoU8Schema } from "../types";
+import { Person, PersonLeo, personLeoSchema } from "../types/helloLeo";
 import { apiError } from "./error";
 import { encodeId } from "./id";
 
@@ -46,6 +47,14 @@ const u64 = (value: number | string): LeoU64 => {
   return leoU64Schema.parse(parsed);
 };
 
+const person = (p: Person): PersonLeo => {
+  const res: PersonLeo = {
+    first_name: u32(p.firstName),
+    second_name: u32(p.secondName),
+  };
+  return personLeoSchema.parse(res);
+};
+
 // NEW-STRUCT: Update parser to support every new struct created in program
 export const leoParse = {
   field,
@@ -54,4 +63,5 @@ export const leoParse = {
   u32,
   u64,
   stringifyLeoCmdParam,
+  person,
 };
