@@ -109,6 +109,8 @@ const leoRun = async ({ contractPath, params = [], transition = "main" }: LeoRun
   const cmd = `cd ${contractPath} && leo run ${transition} ${stringedParams}`;
 
   const { stdout } = await execute(cmd);
+  // console.log(stdout);
+
   const parsed = parseCmdOutput(stdout);
 
   return parsed;

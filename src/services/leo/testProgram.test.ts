@@ -10,15 +10,13 @@ describe("Test Test Contract Transitions", () => {
   };
 
   // TODO: take JS object as input
-  const inputs = {
-    a: "1u32",
-    b: "2u32",
-  };
+  const a = 1;
+  const b = 2;
 
   it("Returns the sum", async () => {
     const { owner, privateKey, viewKey } = keys;
 
-    const res = await test.sum(privateKey, viewKey, inputs.a, inputs.b);
+    const res = await test.sum(privateKey, viewKey, a, b);
 
     console.log(res);
   });
