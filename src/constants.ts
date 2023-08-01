@@ -22,7 +22,7 @@ const envSchema = z.object({
   DEPLOY_PRIVATE_KEY: leoPrivateKeySchema.optional(),
 
   // NEW-PROGRAM: Add the version of the new program here
-  TEST_PROGRAM_VERSION: z.string().optional().transform(transformVersion),
+  HELLO_LEO_PROGRAM_VERSION: z.string().optional().transform(transformVersion),
 });
 
 export const env = envSchema.parse(process.env);
@@ -33,7 +33,7 @@ export const DELETE_PAYLOAD = { message: "deleted" };
 
 export const programNames = {
   // NEW-PROGRAM: Add the name of the new program here
-  TEST_PROGRAM: "test" + env.TEST_PROGRAM_VERSION,
+  HELLO_LEO: "hello_leo" + env.HELLO_LEO_PROGRAM_VERSION,
 };
 
 export const HASH_MAX_RANGE = 999999;

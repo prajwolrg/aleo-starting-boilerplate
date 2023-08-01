@@ -7,4 +7,4 @@ import { testController } from "./controller";
 
 export const router = Router();
 
-router.post("/sum", validate({ body: schemas.body.sum }), asyncHandler(testController.sum));
+router.post("/sum", validate({ body: schemas.body.sum }), asyncHandler(testController.hello));

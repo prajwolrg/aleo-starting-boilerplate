@@ -7,7 +7,7 @@ import { contractsPath, parseOutput, zkRun } from "./util";
 
 const testProgramPath = join(contractsPath, "test");
 
-const sum = async (
+const hello = async (
   privateKey: LeoPrivateKey,
   viewKey: LeoViewKey,
   // TODO: Take input as JS object
@@ -26,7 +26,7 @@ const sum = async (
   const sum = await zkRun({
     privateKey,
     viewKey,
-    appName: programNames.TEST_PROGRAM,
+    appName: programNames.HELLO_LEO,
     contractPath: testProgramPath,
     transition,
     params,
@@ -37,4 +37,4 @@ const sum = async (
   return sum;
 };
 
-export const test = { sum };
+export const helloLeo = { hello };

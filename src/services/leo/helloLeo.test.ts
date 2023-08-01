@@ -1,4 +1,4 @@
-import { test } from "./testProgram";
+import { helloLeo } from "./helloLeo";
 
 jest.setTimeout(600000);
 
@@ -16,7 +16,7 @@ describe("Test Test Contract Transitions", () => {
   it("Returns the sum", async () => {
     const { owner, privateKey, viewKey } = keys;
 
-    const res = await test.sum(privateKey, viewKey, a, b);
+    const res = await helloLeo.hello(privateKey, viewKey, a, b);
 
     console.log(res);
   });

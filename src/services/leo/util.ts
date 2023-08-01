@@ -193,7 +193,7 @@ export const deployPrograms = async () => {
 
   const fees = {
     // NEW-PROGRAM: Add the fee required to deploy the new program here
-    test: 1,
+    helloLeo: 1,
   };
 
   const successfulPrograms: string[] = [];

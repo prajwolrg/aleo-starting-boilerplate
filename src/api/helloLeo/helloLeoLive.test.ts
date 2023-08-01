@@ -4,8 +4,8 @@ import { BASE_URL } from "../../constants";
 
 jest.setTimeout(600000);
 
-describe("POST /test/sum", () => {
-  const route = "/test/sum";
+describe("POST /helloLeo/sum", () => {
+  const route = "/helloLeo/sum";
 
   it("should return 200", async () => {
     // Note: This test works only if the server has started
