@@ -21,7 +21,7 @@ Before running the API locally, make sure to install the following software:
 ## Adding your own program
 
 1. Create your new program at [contracts folder/](/contracts). You can use `leo new program_name` to create a program.
-2. Add your `program_name` to [programNames](/src/constants.ts/#L35)
+2. Add your `program_name` to [programNames](/src/constants.ts/#L35) and add deployment fee to [leo/utils.ts](/src/services/leo/util.ts/#L204)
 3. Create a new file and add different types that your program might need at [types](src/types). Create two types for each object; one to be used with TS/JS, and other type to be used with Leo.
 4. Add the conversion logic (Leo -> JS/TS) at [util](src/services/leo/util.ts/#67).
 5. Add the conversion logic (JS/TS -> Leo) at [leo-parsers](src/utils/leo-parsers.ts/#58).
